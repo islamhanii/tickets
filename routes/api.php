@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProfileController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\TicketController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +22,12 @@ Route::post('/signup', [AuthController::class, 'signup']);
 
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'profile']);
-    Route::post('/profile/update', [ProfileController::class, 'update']);
+    Route::group(['prefix' => 'profile'], function () {
+        Route::get('/', [ProfileController::class, 'profile']);
+        Route::post('/update', [ProfileController::class, 'update']);
+    });
+
+    Route::group(['prefix' => 'tickets'], function () {
+        Route::get('/', [TicketController::class, 'index']);
+    });
 });

@@ -2,11 +2,17 @@
 
 namespace App\Http\Requests\Api\Profile;
 
+use App\Http\Traits\ApiResponse;
+use App\Http\Traits\CustomFailedValidation;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProfileRequest extends FormRequest
 {
+    use ApiResponse, CustomFailedValidation;
+
+    protected $stopOnFirstFailure = true;
+    
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -22,7 +28,7 @@ class UpdateProfileRequest extends FormRequest
      */
     public function rules(): array
     {
-        return array(User::rules(), [
+        return array_merge(User::rules(), [
             'email' => 'required|email:filter|unique:users,email,' . auth()->user()->id,
             'phone' => 'required|string|max:50|unique:users,phone,' . auth()->user()->id,
             'password' => 'nullable|string|min:8|max:32|confirmed',
