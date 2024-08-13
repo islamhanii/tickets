@@ -2,11 +2,16 @@
 
 namespace App\Exceptions;
 
+use App\Http\Traits\ApiResponse;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use ApiResponse;
     /**
      * A list of exception types with their corresponding custom log levels.
      *
@@ -43,6 +48,18 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        $this->renderable(function (AuthenticationException $e, $request) {
+            return $this->apiResponse(401, __('messages.not_auth'));
+        });
+
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            return $this->apiResponse(404, __('messages.not_founded'));
+        });
+
+        $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
+            return $this->apiResponse(405, __('messages.wrong_method'));
         });
     }
 }
