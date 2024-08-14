@@ -7,6 +7,7 @@ return [
     'logged_successfully' => 'You are logged in successfully',
     'login_failed' => 'Wrong email or password',
     'signup_successfully' => 'Welcome to our Tickets Application',
+    'logged_out_successfully' => 'You are logged out successfully',
     'profile' => 'Profile information',
     'profile_updated' => 'Profile updated successfully',
     'tickets' => 'Tickets',

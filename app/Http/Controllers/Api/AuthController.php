@@ -8,6 +8,7 @@ use App\Http\Requests\Api\Auth\SignupRequest;
 use App\Http\Traits\ApiResponse;
 use App\Http\Traits\ImageStorage;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -46,5 +47,14 @@ class AuthController extends Controller
         return $this->apiResponse(200, __('messages.signup_successfully'), null, [
             'access_token' => $token->plainTextToken,
         ]);
+    }
+
+    /*----------------------------------------------------------------------------------------------------*/
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return $this->apiResponse(200, __('messages.logged_out_successfully'));
     }
 }
