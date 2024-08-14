@@ -186,6 +186,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'ticket_id' => 'ticket',
+    ],
 
 ];

@@ -17,7 +17,10 @@ class TicketResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'description' => $this->description,
+            $this->mergeWhen($this->description, [
+                'description' => $this->description,
+            ]),
+            'created_at' => $this->created_at,
         ];
     }
 }

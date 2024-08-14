@@ -10,4 +10,14 @@ class Ticket extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    /*----------------------------------------------------------------------------------------------------*/
+
+    public static function rules()
+    {
+        return [
+            'title' => 'required|string|max:250',
+            'description' => 'required|string|max:5000',
+        ];
+    }
 }

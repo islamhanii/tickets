@@ -9,4 +9,10 @@ return [
     'signup_successfully' => 'Welcome to our Tickets Application',
     'profile' => 'Profile information',
     'profile_updated' => 'Profile updated successfully',
+    'tickets' => 'Tickets',
+    'ticket' => 'Ticket',
+    'ticket_not_founded' => 'Ticket not founded',
+    'ticket_created' => 'Ticket created successfully',
+    'ticket_updated' => 'Ticket updated successfully',
+    'ticket_deleted' => 'Ticket deleted successfully',
 ];

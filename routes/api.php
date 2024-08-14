@@ -24,10 +24,14 @@ Route::post('/signup', [AuthController::class, 'signup']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::group(['prefix' => 'profile'], function () {
         Route::get('/', [ProfileController::class, 'profile']);
-        Route::post('/update', [ProfileController::class, 'update']);
+        Route::put('/update', [ProfileController::class, 'update']);
     });
 
     Route::group(['prefix' => 'tickets'], function () {
         Route::get('/', [TicketController::class, 'index']);
+        Route::get('/{ticket_id}', [TicketController::class, 'show']);
+        Route::post('/store', [TicketController::class, 'store']);
+        Route::put('/update', [TicketController::class, 'update']);
+        Route::delete('/{ticket}', [TicketController::class, 'destroy']);
     });
 });
